@@ -86,6 +86,15 @@ def move_arm_down_turbo():
     arm_motor.start_at_power(100)
     arm_motor.run_for_degrees(-360,100)
 
+def gyro_straight_forward_cs(target_yawn, distance, power):
+    right_motor.set_degrees_counted(0)
+    while(abs(right_motor.get_degrees_counted()) <= (distance / 17.5 * 360)):
+        if(col_sensor.get_reflected_light() < 40):
+            mm_motor.stop()
+        correction = target_yawn - hub.motion_sensor.get_yaw_angle()
+        mm_motor.start_tank_at_power((power + correction), (power - correction))
+    mm_motor.stop()
+
 def gyro_straight_forward(target_yawn, distance, power):
     right_motor.set_degrees_counted(0)
     while(abs(right_motor.get_degrees_counted()) <= (distance / 17.5 * 360)):
@@ -199,16 +208,18 @@ while True:
         #move_arm_up(150,slow_speed)
         move_tail_arm_up(80,normal_speed)
         mm_motor = MotorPair("A","B")
-        gyro_straight_forward(-90,32,normal_speed) #moving forward to west
-        left_turn_motor(180,slow_speed) #facing south
+        gyro_straight_forward_cs(-90,32,slow_speed-10) #moving forward to west
+        mm_motor.move(-100,'degrees',0,20)
+        left_turn_motor(180,slow_speed-10) #facing south
         mm_motor = MotorPair("B","A")
+        gyro_straight_forward(170,15,normal_speed)
         mm_motor.move(1000,'degrees',0,42)
         #gyro_straight_forward(-179,45,normal_speed) #moving forward to north
         mm_motor = MotorPair("A","B")
-        gyro_straight_forward(0,3,normal_speed)
+        #gyro_straight_forward(0,2,slow_speed)
 
-        right_turn_motor(180,slow_speed)
-        mm_motor.move(600,'degrees',0,42)
+        right_turn_motor(180,slow_speed-10)
+        mm_motor.move(200,'degrees',0,20)
 
 
 
@@ -219,6 +230,7 @@ while True:
         print("Round1")
 #Round 1 start
         wait_for_seconds(1)
+        """
         hub.motion_sensor.reset_yaw_angle()
         mm_motor = MotorPair("B","A")
         gyro_straight_forward(0,115,normal_speed)
@@ -247,23 +259,30 @@ while True:
         right_turn_motor(75,slow_speed)
         gyro_straight_forward(1,185,fast_speed)
 #Round 1 end
+"""
     switch_flag = 1
     hub.right_button.wait_until_pressed()
     hub.light_matrix.write('2')
     print("Round2")
 #Round 2 start
+    mm_motor = MotorPair("A","B")
     wait_for_seconds(1)
     hub.motion_sensor.reset_yaw_angle()
-    gyro_straight_forward(0,51,normal_speed)#step1
-    right_turn_motor(80,slow_speed)#step2
-    gyro_straight_forward(44,55,fast_speed)
-    mm_motor = MotorPair("B","A")
-    gyro_straight_forward(40,3,normal_speed)
-    move_arm_up(360,slow_speed)
-    gyro_straight_forward(40,22,normal_speed)
-    left_turn_motor(55,normal_speed)
-    mm_motor.move(-3,"cm",normal_speed)
     move_arm_down_turbo()
+    gyro_straight_forward(0,46,normal_speed)#step1
+    right_turn_motor(75,slow_speed)#step2
+    gyro_straight_forward(44,60,fast_speed)
+    mm_motor = MotorPair("B","A")
+    #gyro_straight_forward(40,3,normal_speed)
+    move_arm_up(360,fast_speed)
+    move_tail_arm_down(-120,fast_speed)
+    gyro_straight_forward(40,15,normal_speed)
+    move_arm_down(360,fast_speed)
+    gyro_straight_forward(40,10,slow_speed)
+    move_arm_up(180,fast_speed)
+    #left_turn_motor(55,normal_speed)
+    #mm_motor.move(-3,"cm",normal_speed)
+    #move_arm_down_turbo()
     gyro_straight_forward(90,80,fast_speed)
 #Round 2 end
 
