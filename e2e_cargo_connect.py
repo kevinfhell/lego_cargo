@@ -91,6 +91,7 @@ def gyro_straight_forward_cs(target_yawn, distance, power):
     while(abs(right_motor.get_degrees_counted()) <= (distance / 17.5 * 360)):
         if(col_sensor.get_reflected_light() < 40):
             mm_motor.stop()
+            break
         correction = target_yawn - hub.motion_sensor.get_yaw_angle()
         mm_motor.start_tank_at_power((power + correction), (power - correction))
     mm_motor.stop()
@@ -143,7 +144,7 @@ def pid_line_follow(kp,ki,kd,distance):
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #Variable definition
 #----------------------------------------------------------------------------------------------------------------------------------------------------
-switch_flag = 1 # use as a local variable to switch between round1 and round3
+switch_flag = 0 # use as a local variable to switch between round1 and round3
 fast_speed = 70 # maximum speed
 normal_speed = 50 # normal speed for routine.
 slow_speed = 35 #slow speed to control the accuracy
@@ -230,36 +231,50 @@ while True:
         print("Round1")
 #Round 1 start
         wait_for_seconds(1)
-        """
+        
         hub.motion_sensor.reset_yaw_angle()
         mm_motor = MotorPair("B","A")
-        gyro_straight_forward(0,115,normal_speed)
+        gyro_straight_forward(0,113,normal_speed)
         left_turn_motor(88,slow_speed)
-        gyro_straight_forward(-49,89,normal_speed)
+        gyro_straight_forward(-52,70,normal_speed)
+        mm_motor.move(150,"degrees",0)
         mm_motor = MotorPair("A","B")
         mm_motor.move(130,"degrees",0)
         right_turn(0,30,0)
         mm_motor.move(200,"degrees",0)
         wait_for_seconds(1)
         while True:
-            if(dis_sensor.get_distance_cm() > 20):
+            if(dis_sensor.get_distance_cm() > 17):
                 mm_motor.start(0,-10)
-            if(dis_sensor.get_distance_cm() <= 20):
+            if(dis_sensor.get_distance_cm() <= 17):
                 mm_motor.stop()
                 break
         wait_for_seconds(1)
-        left_turn_motor(145,slow_speed)
+        left_turn_motor(177,slow_speed)
         arm_motor.run_for_rotations(-1)
-        mm_motor = MotorPair("A","B")
-        gyro_straight_forward(-86,32,slow_speed+10)
         wait_for_seconds(1)
-        arm_motor.set_default_speed(slow_speed)
+        while True:
+            if(dis_sensor.get_distance_cm() > 11):
+                mm_motor.start(0,-10)
+            if(dis_sensor.get_distance_cm() <= 11):
+                mm_motor.stop()
+                break
+        mm_motor = MotorPair("A","B")
+        gyro_straight_forward(-92,48,slow_speed+10)
+        wait_for_seconds(1)
+        arm_motor.set_default_speed(slow_speed-10)
         arm_motor.run_for_rotations(1.25)
-        mm_motor.move(-22,"cm",0)
-        right_turn_motor(75,slow_speed)
-        gyro_straight_forward(1,185,fast_speed)
+        while True:
+            if(dis_sensor.get_distance_cm() > 34.5):
+                mm_motor.start(0,-10)
+            if(dis_sensor.get_distance_cm() <= 34.5):
+                mm_motor.stop()
+                break
+        #mm_motor.move(-2,"cm",0)
+        right_turn_motor(74,slow_speed)
+        gyro_straight_forward(-1,185,normal_speed)
 #Round 1 end
-"""
+
     switch_flag = 1
     hub.right_button.wait_until_pressed()
     hub.light_matrix.write('2')
