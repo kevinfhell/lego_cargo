@@ -174,9 +174,9 @@ move_arm_down_turbo()
 #move_tail_arm_down(90,normal_speed)
 mm_motor = MotorPair("A","B")
 hub.motion_sensor.reset_yaw_angle()
-gyro_straight_forward(0,45,normal_speed)# moving straight North from launching aera
+gyro_straight_forward(0,48,normal_speed)# moving straight North from launching aera
 print("gyro degree before right turn", hub.motion_sensor.get_yaw_angle())
-right_turn_motor(230,normal_speed+20)#step2    trun right robot heading east
+right_turn_motor(150,normal_speed)#step2    trun right robot heading east
 # move_arm_up(20,slow_speed) #lift arm up to pass platooning truck
 print("gyro degree before turn", hub.motion_sensor.get_yaw_angle())
 gyro_straight_forward(89,73,normal_speed) # complete to move the platooning truck
@@ -194,7 +194,7 @@ arm_motor.set_stall_detection(True)
 #move_arm_down(80,slow_speed) # lower arm to hold the cargo
 mm_motor = MotorPair("A","B")
 gyro_straight_forward(90,3,fast_speed) #moving toward east
-right_turn_motor(210,slow_speed-10) #right turn to enter Cargo Connect circle
+right_turn_motor(160,slow_speed-10) #right turn to enter Cargo Connect circle
 gyro_straight_forward(175,1,fast_speed) #adjust robot heading south
 mm_motor.move(-5,"cm",0,slow_speed)
 move_arm_up(280,slow_speed) # lift up arm to release cargos
@@ -204,7 +204,7 @@ mm_motor = MotorPair("B","A")
 
 gyro_straight_forward(175,16,slow_speed) # backing up to unload cargo ship
 
-right_turn_motor(180,slow_speed-10) # robot heading west
+right_turn_motor(170,slow_speed-10) # robot heading west
 
 mm_motor = MotorPair("A","B")
 gyro_straight_forward(-90,10,slow_speed) #adjust robot heading west
