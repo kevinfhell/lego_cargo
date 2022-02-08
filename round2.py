@@ -171,8 +171,8 @@ wait_for_seconds(1)
 hub.motion_sensor.reset_yaw_angle()
 move_arm_down_turbo()
 gyro_straight_forward(0,52,normal_speed)#step1
-right_turn_motor(70,slow_speed)#step2
-gyro_straight_forward(32,60,normal_speed+10)
+right_turn_motor(30,slow_speed)#step2
+gyro_straight_forward(30,52,normal_speed+20)
 mm_motor = MotorPair("B","A")
 #gyro_straight_forward(40,3,normal_speed)
 move_arm_up(360,fast_speed)
