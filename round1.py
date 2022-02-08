@@ -161,7 +161,7 @@ middle_reflection = 80 # used for the line follower or accurate positioning.
 #Execution
 hub.light_matrix.show_image('HAPPY')
 #Round 1 start
-wait_for_seconds(1)
+#wait_for_seconds(1)
 hub.motion_sensor.reset_yaw_angle()
 arm_motor.run_for_rotations(1)
 mm_motor = MotorPair("B","A")
@@ -194,18 +194,18 @@ wait_for_seconds(1)
 mm_motor = MotorPair("A","B")
 gyro_straight_forward_print(-90,37,slow_speed-10)
 wait_for_seconds(1)
-arm_motor.set_default_speed(slow_speed-20)
-arm_motor.run_for_rotations(0.6)
+arm_motor.set_default_speed(slow_speed-15)
+arm_motor.run_for_rotations(1.0)
 while True:
-    if(dis_sensor.get_distance_cm() > 36):
+    if(dis_sensor.get_distance_cm() > 38):
         mm_motor.start(0,-10)
-    if(dis_sensor.get_distance_cm() <= 36):
+    if(dis_sensor.get_distance_cm() <= 38):
         mm_motor.stop()
         break
 #mm_motor.move(-2,"cm",0)
 wait_for_seconds(1)
 right_turn_motor(90,slow_speed)
-gyro_straight_forward(0,190,normal_speed)
+gyro_straight_forward(0,188,normal_speed)
 #left_turn_motor(60,slow_speed)
 #mm_motor.move(8,"cm",0)
 #gyro_straight_forward(-1,80,normal_speed)
