@@ -175,10 +175,10 @@ move_arm_down_turbo()
 mm_motor = MotorPair("A","B")
 hub.motion_sensor.reset_yaw_angle()
 gyro_straight_forward(0,48,normal_speed)# moving straight North from launching aera
-print("gyro degree before right turn", hub.motion_sensor.get_yaw_angle())
+#print("gyro degree before right turn", hub.motion_sensor.get_yaw_angle())
 right_turn_motor(150,normal_speed)#step2    trun right robot heading east
 # move_arm_up(20,slow_speed) #lift arm up to pass platooning truck
-print("gyro degree before turn", hub.motion_sensor.get_yaw_angle())
+#print("gyro degree before turn", hub.motion_sensor.get_yaw_angle())
 gyro_straight_forward(89,73,normal_speed) # complete to move the platooning truck
 #move_tail_arm_up(10,normal_speed) #lift arm up to pass platooning truck
 #gyro_straight_forward(89,20,normal_speed) # hit west bridge down
@@ -197,7 +197,7 @@ gyro_straight_forward(90,3,fast_speed) #moving toward east
 right_turn_motor(160,slow_speed-10) #right turn to enter Cargo Connect circle
 gyro_straight_forward(175,1,fast_speed) #adjust robot heading south
 mm_motor.move(-5,"cm",0,slow_speed)
-move_arm_up(280,slow_speed) # lift up arm to release cargos
+move_arm_up(280,normal_speed) # lift up arm to release cargos
 
 mm_motor = MotorPair("B","A")
 #mm_motor.move(50,'cm',170,slow_speed)
@@ -211,14 +211,14 @@ gyro_straight_forward(-90,10,slow_speed) #adjust robot heading west
 move_arm_down(50,slow_speed)
 move_tail_arm_down(20,normal_speed)
 mm_motor = MotorPair("B","A")
-gyro_straight_forward(-90,28,normal_speed) #moving the cargo ship - backing up to east
+gyro_straight_forward(-90,27,fast_speed) #moving the cargo ship - backing up to east
 #move_arm_up(150,slow_speed)
-move_tail_arm_up(80,normal_speed)
+move_tail_arm_up(80,fast_speed)
 mm_motor = MotorPair("A","B")
 gyro_straight_forward_cs(-90,35,slow_speed-10) #moving forward to west
 move_tail_arm_up(10,normal_speed)
 #mm_motor.move(-20,'degrees',0,20)
-left_turn_motor(180,slow_speed-10) #facing south
+left_turn_motor(180,slow_speed) #facing south
 mm_motor = MotorPair("B","A")
 #gyro_straight_forward(170,15,normal_speed)
 mm_motor.move(1000,'degrees',0,42)
