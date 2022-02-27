@@ -161,8 +161,7 @@ middle_reflection = 80 # used for the line follower or accurate positioning.
 
 #Execution
 hub.light_matrix.show_image('HAPPY')
-
-hub.light_matrix.write('3')
+hub.light_matrix.write('5')
 print("Round3")
 #Round 3 start
 wait_for_seconds(1)
@@ -172,17 +171,21 @@ wait_for_seconds(1)
 #    arm_motor.stop()
 move_arm_down_turbo()
 #move_tail_arm_down(90,normal_speed)
+move_tail_arm_up(80,normal_speed)
 mm_motor = MotorPair("A","B")
 hub.motion_sensor.reset_yaw_angle()
-gyro_straight_forward(0,48,normal_speed)# moving straight North from launching aera
-print("gyro degree before right turn", hub.motion_sensor.get_yaw_angle())
+gyro_straight_forward(0,47,normal_speed)# moving straight North from launching aera
+#print("gyro degree before right turn", hub.motion_sensor.get_yaw_angle())
 right_turn_motor(150,normal_speed)#step2    trun right robot heading east
 # move_arm_up(20,slow_speed) #lift arm up to pass platooning truck
 print("gyro degree before turn", hub.motion_sensor.get_yaw_angle())
-gyro_straight_forward(89,73,normal_speed) # complete to move the platooning truck
+gyro_straight_forward(89,48,normal_speed)
+move_tail_arm_down(90,normal_speed)
+gyro_straight_forward(80,20,normal_speed) # complete to move the platooning truck
+#move_tail_arm_down(90,normal_speed)
 #move_tail_arm_up(10,normal_speed) #lift arm up to pass platooning truck
 #gyro_straight_forward(89,20,normal_speed) # hit west bridge down
-move_tail_arm_up(11,slow_speed) # lift arm up to pass the east bridge piece
+move_tail_arm_up(15,slow_speed) # lift arm up to pass the east bridge piece
 gyro_straight_forward(89,21,normal_speed) #pass east bridge
 move_tail_arm_up(24,normal_speed) # lower arm to hit east bridge
 gyro_straight_forward(89,15,normal_speed) #pass east bridge
@@ -226,7 +229,7 @@ mm_motor.move(1000,'degrees',0,42)
 mm_motor = MotorPair("A","B")
 #gyro_straight_forward(0,2,slow_speed)
 right_turn_motor(180,slow_speed-10)
-print("-------------degree:", hub.motion_sensor.get_yaw_angle())
+#print("-------------degree:", hub.motion_sensor.get_yaw_angle())
 gyro_straight_forward_cs(-90,10,20)
 mm_motor.move(250,'degrees',0,10)
 #Round 3 end
