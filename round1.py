@@ -77,7 +77,7 @@ def move_arm_down(degree,speed):
     arm_motor.run_for_degrees(-degree,speed)
 
 def move_tail_arm_down(degree,speed):
-    print("Move arm down")
+    print("Move tail arm down")
     tail_motor.run_for_degrees(degree,speed)
 
 
@@ -203,8 +203,9 @@ while True:
         mm_motor.stop()
         break
 #mm_motor.move(-2,"cm",0)
-wait_for_seconds(1)
-right_turn_motor(90,slow_speed)
+#wait_for_seconds(1)
+mm_motor.move(5,"degrees",normal_speed)
+right_turn_motor(100,normal_speed)
 gyro_straight_forward(0,188,normal_speed)
 #left_turn_motor(60,slow_speed)
 #mm_motor.move(8,"cm",0)
