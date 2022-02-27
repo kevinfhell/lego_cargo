@@ -32,11 +32,13 @@ def gyro_inspection(sw):
         hub.status_light.off()
         print("sw=",sw)
         if(hub.motion_sensor.get_yaw_angle() != 0):
-            hub.status_light.on('green')
             hub.light_matrix.write("Good")
-        if (sw == 0) and (hub.motion_sensor.get_yaw_angle() == 0):
+        if(sw == 0) and (hub.motion_sensor.get_yaw_angle() == 0):
             hub.status_light.on("red")
-            hub.light_matrix.write("Power cycle")
+            hub.light_matrix.write("N")
+        if(sw == 0) and (hub.motion_sensor.get_yaw_angle() != 0):
+            hub.status_light.on('green')
+            hub.light_matrix.write("Y")
 
 #start main()
-gyro_inspection(4)
+gyro_inspection(3)
