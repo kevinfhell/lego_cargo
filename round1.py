@@ -163,7 +163,7 @@ hub.light_matrix.show_image('HAPPY')
 #Round 1 start
 #wait_for_seconds(1)
 hub.motion_sensor.reset_yaw_angle()
-arm_motor.run_for_rotations(1)
+arm_motor.run_for_rotations(0.3)
 mm_motor = MotorPair("B","A")
 gyro_straight_forward_print(0,113,normal_speed)
 left_turn_motor(99,slow_speed)
@@ -185,28 +185,30 @@ left_turn_motor(186,slow_speed)
 arm_motor.run_for_rotations(-1.1)
 wait_for_seconds(1)
 while True:
-    if(dis_sensor.get_distance_cm() > 18):
+    if(dis_sensor.get_distance_cm() > 19):
         mm_motor.start(0,-10)
-    if(dis_sensor.get_distance_cm() <= 18):
+    if(dis_sensor.get_distance_cm() <= 19):
         mm_motor.stop()
         break
 wait_for_seconds(1)
 mm_motor = MotorPair("A","B")
-gyro_straight_forward_print(-90,37,slow_speed-10)
+gyro_straight_forward_print(-92,37,slow_speed-10)
 wait_for_seconds(1)
-arm_motor.set_default_speed(slow_speed-15)
-arm_motor.run_for_rotations(1.0)
+arm_motor.set_default_speed(slow_speed-20)
+arm_motor.run_for_rotations(0.8)
 while True:
-    if(dis_sensor.get_distance_cm() > 38):
+    if(dis_sensor.get_distance_cm() > 41):
         mm_motor.start(0,-10)
-    if(dis_sensor.get_distance_cm() <= 38):
+    if(dis_sensor.get_distance_cm() <= 41):
         mm_motor.stop()
         break
 #mm_motor.move(-2,"cm",0)
 #wait_for_seconds(1)
-mm_motor.move(5,"degrees",normal_speed)
-right_turn_motor(100,normal_speed)
-gyro_straight_forward(0,188,normal_speed)
+#mm_motor.move(15,"degrees",normal_speed)
+right_turn_motor(170,normal_speed)
+gyro_straight_forward(0,88,normal_speed)
+left_turn_motor(70,normal_speed)
+gyro_straight_forward(0,120,normal_speed)
 #left_turn_motor(60,slow_speed)
 #mm_motor.move(8,"cm",0)
 #gyro_straight_forward(-1,80,normal_speed)
